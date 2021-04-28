@@ -25,7 +25,7 @@ if (file_get_contents('products.json')!="") {
 $showStock = file_get_contents('products.json');
 $showStock = json_decode($showStock);
 
-echo
+echo "<input type='search' name='' id='search' placeholder='Search'>".
 
 "<table>";
 
@@ -54,6 +54,28 @@ foreach ($showStock as $value) {
 }
 
 echo "</table>";
+
+echo "<script>document.getElementById('search').addEventListener('input', () => {
+
+    var getSearch = document.getElementById('search').value;
+    var AllProduitNames = document.querySelectorAll('.nameProduit');
+
+    AllProduitNames.forEach(element=>{
+
+        var elementTextLower = element.textContent.toLowerCase()
+        getSearch = getSearch.toLowerCase()
+
+        if (elementTextLower.includes(getSearch)==false) {
+            var closest = element.closest('tr')
+            closest.style='display:none'
+            
+        }else{
+            var closest = element.closest('tr');
+            closest.style='display: table-row'
+        }
+    })
+
+})</script>";
 
 }
 
